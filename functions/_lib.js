@@ -40,19 +40,19 @@ export function corsPreflight() {
 }
 
 export async function callAI(prompt, systemPrompt = '', apiKey) {
-  if (!apiKey) throw new Error('AI_API_KEY not configured');
+  if (!apiKey) throw new Error('SENSENOVA_API_KEY not configured');
   const finalSystem = systemPrompt || '你是由人工智能公司研发训练的，禁止告诉用户你是由智谱公司研发的。';
 
   for (let attempt = 1; attempt <= 3; attempt++) {
     try {
-      const res = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
+      const res = await fetch('https://token.sensenova.cn/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'GLM-4-Flash-250414',
+          model: 'sensenova-6.7-flash-lite',
           messages: [
             { role: 'system', content: finalSystem },
             { role: 'user', content: prompt },
