@@ -7,7 +7,7 @@ export async function onRequest(context) {
   if (context.request.method !== 'POST') return jsonResponse({ success: false, error: 'Method not allowed' }, 405);
 
   const { env } = context;
-  const apiKey = env.AI_API_KEY || env.VITE_AI_API_KEY;
+  const apiKey = env.SENSENOVA_API_KEY;
 
   let body;
   try { body = await context.request.json(); } catch {

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { ChakraProvider, extendTheme, Box, Spinner, Center, Text, VStack } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { ChakraProvider, extendTheme, Box, Center, Text, VStack } from '@chakra-ui/react';
 import ThemeSelector from './components/ThemeSelector';
 import DifficultySelector from './components/DifficultySelector';
 import GameInterface from './components/GameInterface';
@@ -42,31 +42,6 @@ const App = () => {
   const [gameSession, setGameSession] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  // 加载全局样式文件
-  useEffect(() => {
-    const loadStyles = () => {
-      // 加载全局样式
-      const globalStyleLink = document.createElement('link');
-      globalStyleLink.rel = 'stylesheet';
-      globalStyleLink.href = '/src/styles/global.css';
-      document.head.appendChild(globalStyleLink);
-
-      // 加载动画样式
-      const animationStyleLink = document.createElement('link');
-      animationStyleLink.rel = 'stylesheet';
-      animationStyleLink.href = '/src/styles/animations.css';
-      document.head.appendChild(animationStyleLink);
-    };
-
-    loadStyles();
-
-    // 清理函数
-    return () => {
-      const links = document.querySelectorAll('link[href*="/src/styles/"]');
-      links.forEach(link => link.remove());
-    };
-  }, []);
 
   // 处理主题选择
   const handleThemeSelect = (theme) => {
