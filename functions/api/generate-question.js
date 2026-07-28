@@ -39,8 +39,8 @@ export async function onRequest(context) {
       theme: themeInfo.name,
       contentLength: question.length, answerLength: answer.length, source: 'ai_generated',
     };
-  } catch {
-    return jsonResponse({ success: false, error: '题目生成失败，请重试' }, 500);
+  } catch (err) {
+    return jsonResponse({ success: false, error: `题目生成失败: ${err.message}` }, 500);
   }
 
   const fallbackQuestion = `${themeInfo.name}背景下，一个简单而神秘的事件。请通过提问来揭示真相。`;
