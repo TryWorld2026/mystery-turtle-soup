@@ -1,7 +1,7 @@
 // POST /api/answer-question — handle user question or answer submission
 // Stateless: client sends all game context, server returns updated state.
 
-import { DIFFICULTIES, jsonResponse, corsPreflight, callAI, parseAIResponse } from '../../_lib.js';
+import { DIFFICULTIES, jsonResponse, corsPreflight, callAI, parseAIResponse } from '../_lib.js';
 
 async function generateClue(question, answer, difficulty, cluesGiven, questionCount, apiKey) {
   const diff = DIFFICULTIES.find(d => d.id === difficulty);
@@ -87,7 +87,7 @@ export async function onRequest(context) {
     if (!parseResult.success) return jsonResponse({ success: false, error: '处理问题失败，请重试' }, 500);
 
     const response = parseResult.data;
-    const newCluesGiven = currentCluesGiven;
+    let newCluesGiven = currentCluesGiven;
 
     let clue = null;
     if (diffInfo && questionCount % diffInfo.clueThreshold === 0) {

@@ -1,6 +1,6 @@
 // POST /api/generate-question — create a new game session with AI-generated question
 
-import { THEMES, DIFFICULTIES, jsonResponse, corsPreflight, callAI, parseQuestionResponse } from '../../_lib.js';
+import { THEMES, DIFFICULTIES, jsonResponse, corsPreflight, callAI, parseQuestionResponse } from '../_lib.js';
 
 export async function onRequest(context) {
   if (context.request.method === 'OPTIONS') return corsPreflight();
