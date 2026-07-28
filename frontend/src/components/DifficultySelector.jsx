@@ -100,7 +100,8 @@ const DifficultySelector = ({ selectedTheme, onDifficultySelect, onBack }) => {
       });
 
       if (!response.ok) {
-        throw new Error('生成题目失败');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `HTTP ${response.status}: 服务器响应错误`);
       }
 
       const gameData = await response.json();
@@ -119,9 +120,9 @@ const DifficultySelector = ({ selectedTheme, onDifficultySelect, onBack }) => {
       console.error('开始游戏失败:', error);
       toast({
         title: "生成失败",
-        description: "无法生成题目，请重试",
+        description: error.message || '无法生成题目，请重试',
         status: "error",
-        duration: 4000,
+        duration: 5000,
         isClosable: true,
       });
     } finally {
