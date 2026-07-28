@@ -1,0 +1,14 @@
+{
+  "name": "turtle-soup-game",
+  "private": true,
+  "scripts": {
+    "build": "cd frontend && npm run build && cp -r ../functions public/functions",
+    "build:functions-only": "cp -r functions frontend/public/functions",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:pages": "npx wrangler pages dev frontend/public --port 3000",
+    "preview": "cd frontend && npm run preview"
+  },
+  "devDependencies": {
+    "wrangler": "^4.44.0"
+  }
+}
